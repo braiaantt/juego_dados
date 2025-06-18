@@ -9,6 +9,7 @@ using namespace std;
 
 void modoUnJugador(){
 
+    int ESCALERA = 100, RESETEAR = -1;
     std::string nombre = obtenerNombre();
     int puntaje = 0;
 
@@ -20,11 +21,29 @@ void modoUnJugador(){
             mostrarRondaActual(nombre, i+1, puntaje);
 
             int puntosDeRonda = jugarRonda();
+
+            if (puntosDeRonda == ESCALERA){
+                mostrarJugadorGanaPorEscalera(nombre);
+                break;
+            }
+
+            if (puntosDeRonda == RESETEAR){
+                mostrarSeReseteanPuntos(nombre);
+                puntaje = 0;
+            }
+
             puntaje += puntosDeRonda;
 
             mostrarPuntajeDeRonda(i+1, puntosDeRonda);
 
+            if(puntaje >= 100){
+                mostrarJugadorGana(nombre, puntaje, i+1);
+                break;
+            }
+
         }
+
+        if(puntaje < 100) mostrarJugadorPierde(nombre, puntaje);
 
     } else {
 

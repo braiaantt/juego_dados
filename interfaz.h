@@ -4,5 +4,7 @@
 std::string obtenerNombre();
 bool establecerRondas();
 int obtenerCantidadRondas();
+void mostrarDados(int dados[], int cantidadDados);
+void mostrarRondaActual(std::string nomre, int ronda, int puntaje);
 
 #endif // INTERFAZ_H_INCLUDED

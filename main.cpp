@@ -7,9 +7,14 @@ int main()
 {
 
     srand(time(NULL));
-    int seleccion;
+    int seleccion, datos = 2;
+    int infoMejorPartida[datos] = {1000,1000};
+    std::string nombreMejorJugador = "Sin registros";
 
     while(seleccion != 4){
+
+        std::string nombreJugador;
+        int infoPartida[datos];
 
         cout<<"-----MENU-----"<<endl;
         cout<<"Seleccione una opcion"<<endl;
@@ -21,12 +26,14 @@ int main()
 
         switch(seleccion){
 
-            case 1: modoUnJugador(); system("pause"); break;
-            case 2: modoDosJugadores(); system("pause"); break;
-            case 3: puntuacionMaxima(); system("pause"); break;
+            case 1: nombreJugador = modoUnJugador(infoPartida);              system("pause"); break;
+            case 2: nombreJugador = modoDosJugadores(infoPartida);           system("pause"); break;
+            case 3: puntuacionMaxima(nombreMejorJugador, infoMejorPartida);  system("pause"); break;
             case 4: break;
 
         }
+
+        nombreMejorJugador = analizarInfoPartida(nombreMejorJugador, nombreJugador, infoPartida, infoMejorPartida);
 
         system("cls");
 

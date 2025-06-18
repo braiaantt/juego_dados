@@ -103,7 +103,7 @@ std::string modoUnJugador(int infoPartida[]){
 
 std::string modoDosJugadores(int infoPartida[]){
 
-
+    int ESCALERA = 100, RESETEO = -1, posRondas = 0, posPuntos = 1;
     string jugador1 = obtenerNombre();
     string jugador2 = obtenerNombre();
 
@@ -121,11 +121,13 @@ std::string modoDosJugadores(int infoPartida[]){
             mostrarRondaActual(jugador1, ronda, puntaje1);
             int puntos1 = jugarRonda();
 
-            if (puntos1 == 100){
+            if (puntos1 == ESCALERA){
                 mostrarJugadorGanaPorEscalera(jugador1);
+                infoPartida[posRondas] = ronda;
+                infoPartida[posPuntos] = ESCALERA;
                 return jugador1;
             }
-            else if (puntos1 == -1){
+            else if (puntos1 == RESETEO){
                 puntaje1 = 0;
                 mostrarSeReseteanPuntos(jugador1);
             }
@@ -140,8 +142,10 @@ std::string modoDosJugadores(int infoPartida[]){
             //Turno jugador 2
             mostrarRondaActual(jugador2, ronda, puntaje2);
             int puntos2 = jugarRonda();
-            if (puntos2 == 100){
+            if (puntos2 == ESCALERA){
                 mostrarJugadorGanaPorEscalera(jugador2);
+                infoPartida[posRondas] = ronda;
+                infoPartida[posPuntos] = ESCALERA;
                 return jugador2;
             }
             else if (puntos2 == -1){
@@ -153,6 +157,23 @@ std::string modoDosJugadores(int infoPartida[]){
             }
 
             mostrarPuntajeParcial(jugador1, puntaje1, jugador2, puntaje2);
+
+            if (puntaje1 >= 100 && (puntaje1 < puntaje2 || puntaje2 < 100)){
+
+                    mostrarJugadorGana(jugador1, puntaje1, ronda);
+                    infoPartida[posRondas] = ronda;
+                    infoPartida[posPuntos] = puntaje1;
+                    return jugador1;
+
+            }
+
+            if (puntaje2 >= 100 && (puntaje2 < puntaje1 || puntaje1 < 100)){
+                    mostrarJugadorGana(jugador2, puntaje2, ronda);
+                    infoPartida[posRondas] = ronda;
+                    infoPartida[posPuntos] = puntaje2;
+                    return jugador2;
+                }
+
             system("pause");
             system("cls");
 
@@ -169,16 +190,14 @@ std::string modoDosJugadores(int infoPartida[]){
 
             if (puntos1 == 100) {
                 mostrarJugadorGanaPorEscalera(jugador1);
+                infoPartida[posRondas] = ronda;
+                infoPartida[posPuntos] = ESCALERA;
                 return jugador1;
             } else if (puntos1 == -1) {
                 puntaje1 = 0;
                 mostrarSeReseteanPuntos(jugador1);
             } else {
                 puntaje1 += puntos1;
-                if (puntaje1 >= 100){
-                    mostrarJugadorGana(jugador1, puntaje1, ronda);
-                    return jugador1;
-                }
             }
 
             mostrarPuntajeParcial(jugador1, puntaje1, jugador2, puntaje2);
@@ -189,21 +208,33 @@ std::string modoDosJugadores(int infoPartida[]){
             mostrarRondaActual(jugador2, ronda, puntaje2);
             int puntos2 = jugarRonda();
 
-            if (puntos2 == 100){
+            if (puntos2 == ESCALERA){
                 mostrarJugadorGanaPorEscalera(jugador2);
+                infoPartida[posRondas] = ronda;
+                infoPartida[posPuntos] = ESCALERA;
                 return jugador2;
             } else if (puntos2 == -1) {
                 puntaje2 = 0;
                 mostrarSeReseteanPuntos(jugador2);
             } else {
                 puntaje2 += puntos2;
-                if (puntaje2 >= 100){
-                    mostrarJugadorGana(jugador2, puntaje2, ronda);
-                    return jugador2;
-                }
             }
 
             mostrarPuntajeParcial(jugador1, puntaje1, jugador2, puntaje2);
+
+            if (puntaje1 >= 100 && (puntaje1 < puntaje2 || puntaje2 < 100)){
+                    mostrarJugadorGana(jugador1, puntaje1, ronda);
+                    infoPartida[posRondas] = ronda;
+                    infoPartida[posPuntos] = puntaje1;
+                    return jugador1;
+                }
+            if (puntaje2 >= 100 && (puntaje2 < puntaje1 || puntaje1 < 100)){
+                    mostrarJugadorGana(jugador2, puntaje2, ronda);
+                    infoPartida[posRondas] = ronda;
+                    infoPartida[posPuntos] = puntaje2;
+                    return jugador2;
+                }
+
             system("pause");
             system("cls");
 

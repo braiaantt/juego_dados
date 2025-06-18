@@ -10,5 +10,9 @@ void mostrarPuntajeDeRonda(int numRonda, int puntajeDeRonda);
 void mostrarNumeroLanzamiento(int numLanzamiento);
 void mostrarPuntajeTirada(int puntajeTirada);
 void mostrarCombinacion(int combinacion, int valorDado);
+void mostrarJugadorGanaPorEscalera(std::string nombre);
+void mostrarJugadorGana(std::string nombre, int puntaje, int rondas);
+void mostrarJugadorPierde(std::string nombre, int puntaje);
+void mostrarSeReseteanPuntos(std::string nombre);
 
 #endif // INTERFAZ_H_INCLUDED

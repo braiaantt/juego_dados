@@ -47,3 +47,17 @@ int obtenerCantidadRondas(){
     return rondas;
 
 }
+
+void mostrarDados(int dados[], int cantidadDados){
+
+    for(int i = 0; i<cantidadDados; i++){
+        cout<<dados[i]<<"   ";
+    }
+
+}
+
+void mostrarRondaActual(std::string nombre, int ronda, int puntaje){
+
+    cout<<"Jugador: "<<nombre<<" | Ronda N°"<<ronda<<" | Puntaje: "<<puntaje<<endl;
+
+}

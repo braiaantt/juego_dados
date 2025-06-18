@@ -127,3 +127,8 @@ void mostrarSeReseteanPuntos(std::string nombre){
     cout<<"Mal ahi "<<nombre<<" se te van a resetear los puntos a 0. Mala suerte"<<endl<<endl;
 
 }
+
+void mostrarPuntajeParcial(std::string nombre1, int puntaje1, std::string nombre2, int puntaje2) {
+    std::cout << "Puntaje de " << nombre1 << ": " << puntaje1 << std::endl;
+    std::cout << "Puntaje de " << nombre2 << ": " << puntaje2 << std::endl;
+}

@@ -48,7 +48,35 @@ void modoUnJugador(){
 
     } else {
 
-        cout<<"Aca se juega hasta que termine la partida senior "<<nombre<<endl;
+        int ronda = 1;
+
+        while(true){
+
+            mostrarRondaActual(nombre, ronda, puntaje);
+
+            int puntosDeRonda = jugarRonda();
+
+            if (puntosDeRonda == ESCALERA){
+                mostrarJugadorGanaPorEscalera(nombre);
+                break;
+            }
+
+            if (puntosDeRonda == RESETEAR){
+                mostrarSeReseteanPuntos(nombre);
+                puntaje = 0;
+            }
+
+            puntaje += puntosDeRonda;
+
+            mostrarPuntajeDeRonda(ronda, puntosDeRonda);
+            ronda++;
+
+            if(puntaje >= 100){
+                mostrarJugadorGana(nombre, puntaje, ronda);
+                break;
+            }
+
+        }
 
     }
 

@@ -104,3 +104,26 @@ void mostrarCombinacion(int combinacion, int valorDado){
     }
 
 }
+
+void mostrarJugadorGanaPorEscalera(std::string nombre){
+
+    cout<<"FELICIDADES "<<nombre<<" GANASTE POR ESCALERA TENES UNA SUERTE INCREIBLE JUGALE AL KINI METE TODO AL ROJO ANDA AL BINGO NOSE HACE ALGO"<<endl<<endl;
+
+}
+
+void mostrarJugadorGana(std::string nombre, int puntaje, int rondas){
+
+    cout<<"Felicidades "<<nombre<<"! Ganaste en "<<rondas<<" rondas con un puntaje de "<<puntaje<<endl<<endl;
+
+}
+void mostrarJugadorPierde(std::string nombre, int puntaje){
+
+    cout<<"Se terminaron las rondas y no alcanzaste el objetivo :c. Tu puntaje: "<<puntaje<<endl<<endl;
+
+}
+
+void mostrarSeReseteanPuntos(std::string nombre){
+
+    cout<<"Mal ahi "<<nombre<<" se te van a resetear los puntos a 0. Mala suerte"<<endl<<endl;
+
+}

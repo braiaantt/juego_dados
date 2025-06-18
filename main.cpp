@@ -5,6 +5,8 @@ using namespace std;
 
 int main()
 {
+
+    srand(time(NULL));
     int seleccion;
 
     while(seleccion != 4){

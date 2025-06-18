@@ -14,6 +14,7 @@ void modoUnJugador(){
     int puntaje = 0;
 
     if(establecerRondas()){
+
         int rondas = obtenerCantidadRondas();
 
         for(int i = 0; i<rondas; i++){
@@ -109,7 +110,103 @@ int tirarDados(){
 
 void modoDosJugadores(){
 
-    cout<<"Usted ha seleccionado el modo juego en duelo"<<endl;
+
+    string jugador1 = obtenerNombre();
+    string jugador2 = obtenerNombre();
+
+    int puntaje1 = 0, puntaje2 = 0;
+    int ronda = 1;
+    bool hayGanador = false;
+
+    if (establecerRondas()){
+        int rondas = obtenerCantidadRondas();
+        for (int i=0; i<rondas; i++){
+            mostrarRondaActual(jugador1, ronda, puntaje1);
+            int puntos1 = jugarRonda();
+            if (puntos1 == 100){
+                cout << jugador1 << " Hizo una escalera, ¡GANA LA PARTIDA!" <<endl;
+                return;
+            }
+            else if (puntos1 == -1){
+                puntaje1 = 0;
+                cout << "!" << jugador1 << " Sacó seis 6s! Puntaje Reseteado." <<endl;
+            }
+            else {
+                puntaje1 += puntos1;
+            }
+
+            mostrarPuntajeParcial (jugador1, puntaje1, jugador2, puntaje2);
+            system("pause");
+            system("cls");
+
+            mostrarRondaActual(jugador2, ronda, puntaje2);
+            int puntos2 = jugarRonda();
+            if (puntos2 == 100){
+                cout << jugador2 << " Hizo una escalera, ¡GANA LA PARTIDA!" <<endl;
+                return;
+            }
+            else if (puntos2 == -1){
+                puntaje2 = 0;
+                cout << "!" << jugador2 << " Sacó seis 6s! Puntaje Reseteado." <<endl;
+            }
+            else {
+                puntaje2 += puntos2;
+            }
+
+            mostrarPuntajeParcial(jugador1, puntaje1, jugador2, puntaje2);
+            system("pause");
+            system("cls");
+
+            ronda++;
+        }
+
+    } else {
+
+        while(!hayGanador){
+            mostrarRondaActual(jugador1, ronda, puntaje1);
+            int puntos1 = jugarRonda();
+            if (puntos1 == 100) {
+                cout << jugador1 << " hizo una escalera. ¡GANA LA PARTIDA!" << endl;
+                return;
+            } else if (puntos1 == -1) {
+                puntaje1 = 0;
+                cout << "¡" << jugador1 << " sacó seis 6s! Puntaje reseteado." << endl;
+            } else {
+                puntaje1 += puntos1;
+                if (puntaje1 >= 100){
+                    cout << jugador1 << " superó los 100 puntos. ¡GANA LA PARTIDA!" << endl;
+                    return;
+                }
+            }
+
+            mostrarPuntajeParcial(jugador1, puntaje1, jugador2, puntaje2);
+            system("pause");
+            system("cls");
+
+            mostrarRondaActual(jugador2, ronda, puntaje2);
+            int puntos2 = jugarRonda();
+            if (puntos2 == 100) {
+                cout << jugador2 << " hizo una escalera. ¡GANA LA PARTIDA!" << endl;
+                return;
+            } else if (puntos2 == -1) {
+                puntaje2 = 0;
+                cout << "¡" << jugador2 << " sacó seis 6s! Puntaje reseteado." << endl;
+            } else {
+                puntaje2 += puntos2;
+                if (puntaje2 >= 100){
+                    cout << jugador2 << " superó los 100 puntos. ¡GANA LA PARTIDA!" << endl;
+                    return;
+                }
+            }
+
+            mostrarPuntajeParcial(jugador1, puntaje1, jugador2, puntaje2);
+            system("pause");
+            system("cls");
+
+            ronda++;
+        }
+
+    }
 
 }
 

@@ -156,7 +156,7 @@ void modoDosJugadores(){
             } else {
                 puntaje1 += puntos1;
                 if (puntaje1 >= 100){
-                    mostrarJugadorGana(jugador1);
+                    mostrarJugadorGana(jugador1, puntaje1, ronda);
                     return;
                 }
             }
@@ -168,7 +168,7 @@ void modoDosJugadores(){
             //Turno jugador 2
             mostrarRondaActual(jugador2, ronda, puntaje2);
             int puntos2 = jugarRonda();
-            if (puntos2 == 100)
+            if (puntos2 == 100){
                 mostrarJugadorGanaPorEscalera(jugador2);
                 return;
             } else if (puntos2 == -1) {
@@ -177,7 +177,7 @@ void modoDosJugadores(){
             } else {
                 puntaje2 += puntos2;
                 if (puntaje2 >= 100){
-                    mostrarJugadorGana(jugador2);
+                    mostrarJugadorGana(jugador2, puntaje2, ronda);
                     return;
                 }
             }

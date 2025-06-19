@@ -23,10 +23,10 @@ int calcularCombinacion(int dados[], int cantidadDados, int combinacion){
 
 int analizarCombinacion(int dados[], int cantidadDados){
 
-    int RESETEAR = -1;
+    int ESCALERA = -1;
+    int RESETEAR = -2;
     int SUMA = 1;
     int MULTIPLICAR = 2;
-    int ESCALERA = 100;
 
     ordenarDados(dados, cantidadDados);
 

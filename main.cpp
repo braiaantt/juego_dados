@@ -9,11 +9,12 @@ int main()
     srand(time(NULL));
     int seleccion, datos = 2;
     int infoMejorPartida[datos] = {1000,1000};
-    std::string nombreMejorJugador = "Sin registros";
+
+    std::string nombreMejorJugador = "Sin ganador";
 
     while(seleccion != 4){
 
-        std::string nombreJugador;
+        std::string nombreJugador = "Sin ganador";
         int infoPartida[datos];
 
         cout<<"-----MENU-----"<<endl;
@@ -33,7 +34,10 @@ int main()
 
         }
 
-        nombreMejorJugador = analizarInfoPartida(nombreMejorJugador, nombreJugador, infoPartida, infoMejorPartida);
+
+
+        if(nombreJugador != "Sin ganador")nombreMejorJugador = analizarInfoPartida(nombreMejorJugador, nombreJugador, infoPartida, infoMejorPartida);
+
 
         system("cls");
 

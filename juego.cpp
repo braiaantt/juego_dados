@@ -22,33 +22,14 @@ std::string modoUnJugador(int infoPartida[]){
 
             mostrarRondaActual(nombre, i+1, puntaje);
 
-            int puntosDeRonda = jugarRonda();
+            puntaje = jugarTurno(puntaje, i+1);
 
-            if (puntosDeRonda == ESCALERA){
-
-                infoPartida[posRondas] = i+1;
-                infoPartida[posPuntos] = ESCALERA;
-
-                mostrarGanador(nombre, ESCALERA, i+1);
-                ganador = nombre;
-                break;
-            } else if (puntosDeRonda == RESETEAR){
-                mostrarSeReseteanPuntos(nombre);
-                puntaje = 0;
-            } else {
-                puntaje += puntosDeRonda;
-            }
-
-            mostrarPuntajeDeRonda(i+1, puntosDeRonda);
-
-            if(puntaje >= 100){
-
-                infoPartida[posRondas] = i+1;
-                infoPartida[posPuntos] = puntaje;
+            if(chequearGanador(puntaje, infoPartida, i+1)){
 
                 mostrarGanador(nombre, puntaje, i+1);
                 ganador = nombre;
                 break;
+
             }
 
         }
@@ -63,35 +44,14 @@ std::string modoUnJugador(int infoPartida[]){
 
             mostrarRondaActual(nombre, ronda, puntaje);
 
-            int puntosDeRonda = jugarRonda();
+            puntaje = jugarTurno(puntaje, ronda);
 
-            if (puntosDeRonda == ESCALERA){
-
-                infoPartida[posRondas] = ronda;
-                infoPartida[posPuntos] = ESCALERA;
-
-                mostrarGanador(nombre, ESCALERA, puntaje);
-                ganador = nombre;
-                break;
-            } else if (puntosDeRonda == RESETEAR){
-
-                mostrarSeReseteanPuntos(nombre);
-                puntaje = 0;
-
-            } else {
-                puntaje += puntosDeRonda;
-            }
-
-            mostrarPuntajeDeRonda(ronda, puntosDeRonda);
-
-            if(puntaje >= 100){
-
-                infoPartida[posRondas] = ronda;
-                infoPartida[posPuntos] = puntaje;
+            if(chequearGanador(puntaje, infoPartida, ronda)){
 
                 mostrarGanador(nombre, puntaje, ronda);
                 ganador = nombre;
                 break;
+
             }
 
             ronda++;
@@ -137,7 +97,7 @@ std::string modoDosJugadores(int infoPartida[]){
             }
             else if (puntos1 == RESETEO){
                 puntaje1 = 0;
-                mostrarSeReseteanPuntos(jugador1);
+                mostrarSeReseteanPuntos();
             }
             else {
                 puntaje1 += puntos1;
@@ -162,7 +122,7 @@ std::string modoDosJugadores(int infoPartida[]){
             }
             else if (puntos2 == RESETEO){
                 puntaje2 = 0;
-                mostrarSeReseteanPuntos(jugador2);
+                mostrarSeReseteanPuntos();
             }
             else {
                 puntaje2 += puntos2;
@@ -219,7 +179,7 @@ std::string modoDosJugadores(int infoPartida[]){
             } else if (puntos1 == RESETEO){
 
                 puntaje1 = 0;
-                mostrarSeReseteanPuntos(jugador1);
+                mostrarSeReseteanPuntos();
 
             } else {
                 puntaje1 += puntos1;
@@ -246,7 +206,7 @@ std::string modoDosJugadores(int infoPartida[]){
             } else if (puntos2 == RESETEO) {
 
                 puntaje2 = 0;
-                mostrarSeReseteanPuntos(jugador2);
+                mostrarSeReseteanPuntos();
 
             } else {
                 puntaje2 += puntos2;
@@ -380,5 +340,36 @@ std::string analizarInfoPartida(std::string nombreActual, std::string nombreJuga
     }
 
     return nombreActual;
+
+}
+
+
+bool chequearGanador(int puntaje, int infoPartida[], int rondas){
+
+    const int ESCALERA = -1,  posRondas = 0, posPuntos = 1;;
+
+    if(puntaje >= 100 || puntaje == ESCALERA){
+        infoPartida[posRondas] = rondas;
+        infoPartida[posPuntos] = puntaje;
+        return true;
+    }
+
+    return  false;
+
+}
+
+int jugarTurno(int puntosActuales, int ronda){
+
+    const int ESCALERA = -1, RESETEO = -2;
+
+    int puntosDeRonda = jugarRonda();
+
+    switch(puntosDeRonda){
+
+        case ESCALERA:  return ESCALERA;
+        case RESETEO:   mostrarSeReseteanPuntos();  return 0;
+        default:        mostrarPuntajeDeRonda(ronda, puntosDeRonda);  return puntosDeRonda + puntosActuales;
+
+    }
 
 }

@@ -126,9 +126,9 @@ void mostrarJugadorPierde(std::string nombre, int puntaje){
 
 }
 
-void mostrarSeReseteanPuntos(std::string nombre){
+void mostrarSeReseteanPuntos(){
 
-    cout<<"Mal ahi "<<nombre<<" se te van a resetear los puntos a 0. Mala suerte"<<endl<<endl;
+    cout<<"Uhh tuviste mala suerte, se te van a resetear los puntos a 0 :c"<<endl<<endl;
 
 }
 

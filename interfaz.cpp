@@ -91,10 +91,10 @@ void mostrarPuntajeTirada(int puntajeTirada){
 
 void mostrarCombinacion(int combinacion, int valorDado){
 
-    const int RESETEAR = -1;
+    const int ESCALERA = -1;
+    const int RESETEAR = -2;
     const int SUMA = 1;
     const int MULTIPLICAR = 2;
-    const int ESCALERA = 100;
 
     switch(combinacion){
         case ESCALERA:      cout<<"COMBINACION: Escalera"<<endl;                break;
@@ -105,15 +105,19 @@ void mostrarCombinacion(int combinacion, int valorDado){
 
 }
 
-void mostrarJugadorGanaPorEscalera(std::string nombre){
+void mostrarGanador(std::string nombre, int puntaje, int rondas){
 
-    cout<<"FELICIDADES "<<nombre<<" GANASTE POR ESCALERA TENES UNA SUERTE INCREIBLE JUGALE AL KINI METE TODO AL ROJO ANDA AL BINGO NOSE HACE ALGO"<<endl<<endl;
+    const int ESCALERA = -1;
 
-}
+    if(puntaje == ESCALERA){
 
-void mostrarJugadorGana(std::string nombre, int puntaje, int rondas){
+        cout<<"FELICIDADES "<<nombre<<" GANASTE POR ESCALERA TENES UNA SUERTE INCREIBLE JUGALE AL KINI METE TODO AL ROJO ANDA AL BINGO NOSE HACE ALGO"<<endl<<endl;
 
-    cout<<"Felicidades "<<nombre<<"! Ganaste en "<<rondas<<" rondas con un puntaje de "<<puntaje<<endl<<endl;
+    } else{
+
+        cout<<"Felicidades "<<nombre<<"! Ganaste en "<<rondas<<" rondas con un puntaje de "<<puntaje<<endl<<endl;
+
+    }
 
 }
 void mostrarJugadorPierde(std::string nombre, int puntaje){

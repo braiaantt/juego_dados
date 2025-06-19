@@ -12,7 +12,7 @@ void mostrarPuntajeTirada(int puntajeTirada);
 void mostrarCombinacion(int combinacion, int valorDado);
 void mostrarGanador(std::string nombre, int puntaje, int rondas);
 void mostrarJugadorPierde(std::string nombre, int puntaje);
-void mostrarSeReseteanPuntos(std::string nombre);
+void mostrarSeReseteanPuntos();
 void mostrarPuntajeParcial(std::string nombre1, int puntaje1, std::string nombre2, int puntaje2);
 
 #endif // INTERFAZ_H_INCLUDED

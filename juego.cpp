@@ -9,8 +9,9 @@ using namespace std;
 
 std::string modoUnJugador(int infoPartida[]){
 
-    int ESCALERA = 100, RESETEAR = -1, posRondas = 0, posPuntos = 1;
+    int ESCALERA = -1, RESETEAR = -2, posRondas = 0, posPuntos = 1;
     std::string nombre = obtenerNombre();
+    std::string ganador = "Sin ganador";
     int puntaje = 0;
 
     if(establecerRondas()){
@@ -24,20 +25,19 @@ std::string modoUnJugador(int infoPartida[]){
             int puntosDeRonda = jugarRonda();
 
             if (puntosDeRonda == ESCALERA){
-                mostrarJugadorGanaPorEscalera(nombre);
 
                 infoPartida[posRondas] = i+1;
                 infoPartida[posPuntos] = ESCALERA;
 
+                mostrarGanador(nombre, ESCALERA, i+1);
+                ganador = nombre;
                 break;
-            }
-
-            if (puntosDeRonda == RESETEAR){
+            } else if (puntosDeRonda == RESETEAR){
                 mostrarSeReseteanPuntos(nombre);
                 puntaje = 0;
+            } else {
+                puntaje += puntosDeRonda;
             }
-
-            puntaje += puntosDeRonda;
 
             mostrarPuntajeDeRonda(i+1, puntosDeRonda);
 
@@ -46,13 +46,14 @@ std::string modoUnJugador(int infoPartida[]){
                 infoPartida[posRondas] = i+1;
                 infoPartida[posPuntos] = puntaje;
 
-                mostrarJugadorGana(nombre, puntaje, i+1);
+                mostrarGanador(nombre, puntaje, i+1);
+                ganador = nombre;
                 break;
             }
 
         }
 
-        if(puntaje < 100) mostrarJugadorPierde(nombre, puntaje);
+        if(puntaje < 100 && puntaje != ESCALERA) mostrarJugadorPierde(nombre, puntaje);
 
     } else {
 
@@ -69,16 +70,17 @@ std::string modoUnJugador(int infoPartida[]){
                 infoPartida[posRondas] = ronda;
                 infoPartida[posPuntos] = ESCALERA;
 
-                mostrarJugadorGanaPorEscalera(nombre);
+                mostrarGanador(nombre, ESCALERA, puntaje);
+                ganador = nombre;
                 break;
-            }
+            } else if (puntosDeRonda == RESETEAR){
 
-            if (puntosDeRonda == RESETEAR){
                 mostrarSeReseteanPuntos(nombre);
                 puntaje = 0;
-            }
 
-            puntaje += puntosDeRonda;
+            } else {
+                puntaje += puntosDeRonda;
+            }
 
             mostrarPuntajeDeRonda(ronda, puntosDeRonda);
 
@@ -87,7 +89,8 @@ std::string modoUnJugador(int infoPartida[]){
                 infoPartida[posRondas] = ronda;
                 infoPartida[posPuntos] = puntaje;
 
-                mostrarJugadorGana(nombre, puntaje, ronda);
+                mostrarGanador(nombre, puntaje, ronda);
+                ganador = nombre;
                 break;
             }
 
@@ -97,15 +100,16 @@ std::string modoUnJugador(int infoPartida[]){
 
     }
 
-    return nombre;
+    return ganador;
 
 }
 
 std::string modoDosJugadores(int infoPartida[]){
 
-    int ESCALERA = 100, RESETEO = -1, posRondas = 0, posPuntos = 1;
+    int ESCALERA = -1, RESETEO = -2, posRondas = 0, posPuntos = 1;
     string jugador1 = obtenerNombre();
     string jugador2 = obtenerNombre();
+    string ganador = "Sin ganador";
 
     int puntaje1 = 0, puntaje2 = 0;
     int ronda = 1;
@@ -122,10 +126,14 @@ std::string modoDosJugadores(int infoPartida[]){
             int puntos1 = jugarRonda();
 
             if (puntos1 == ESCALERA){
-                mostrarJugadorGanaPorEscalera(jugador1);
+
                 infoPartida[posRondas] = ronda;
                 infoPartida[posPuntos] = ESCALERA;
-                return jugador1;
+
+                mostrarGanador(jugador1, ESCALERA, ronda);
+
+                ganador = jugador1;
+                break;
             }
             else if (puntos1 == RESETEO){
                 puntaje1 = 0;
@@ -143,12 +151,16 @@ std::string modoDosJugadores(int infoPartida[]){
             mostrarRondaActual(jugador2, ronda, puntaje2);
             int puntos2 = jugarRonda();
             if (puntos2 == ESCALERA){
-                mostrarJugadorGanaPorEscalera(jugador2);
+
+                mostrarGanador(jugador2, ESCALERA, ronda);
+
                 infoPartida[posRondas] = ronda;
                 infoPartida[posPuntos] = ESCALERA;
-                return jugador2;
+
+                ganador = jugador2;
+                break;
             }
-            else if (puntos2 == -1){
+            else if (puntos2 == RESETEO){
                 puntaje2 = 0;
                 mostrarSeReseteanPuntos(jugador2);
             }
@@ -160,18 +172,24 @@ std::string modoDosJugadores(int infoPartida[]){
 
             if (puntaje1 >= 100 && (puntaje1 < puntaje2 || puntaje2 < 100)){
 
-                    mostrarJugadorGana(jugador1, puntaje1, ronda);
+                    mostrarGanador(jugador1, puntaje1, ronda);
+
                     infoPartida[posRondas] = ronda;
                     infoPartida[posPuntos] = puntaje1;
-                    return jugador1;
 
+                    ganador = jugador1;
+                    break;
             }
 
             if (puntaje2 >= 100 && (puntaje2 < puntaje1 || puntaje1 < 100)){
-                    mostrarJugadorGana(jugador2, puntaje2, ronda);
+
+                    mostrarGanador(jugador2, puntaje2, ronda);
+
                     infoPartida[posRondas] = ronda;
                     infoPartida[posPuntos] = puntaje2;
-                    return jugador2;
+
+                    ganador = jugador2;
+                    break;
                 }
 
             system("pause");
@@ -189,13 +207,20 @@ std::string modoDosJugadores(int infoPartida[]){
             int puntos1 = jugarRonda();
 
             if (puntos1 == 100) {
-                mostrarJugadorGanaPorEscalera(jugador1);
+
+                mostrarGanador(jugador1, ESCALERA, ronda);
+
                 infoPartida[posRondas] = ronda;
                 infoPartida[posPuntos] = ESCALERA;
-                return jugador1;
-            } else if (puntos1 == -1) {
+
+                ganador = jugador1;
+                break;
+
+            } else if (puntos1 == RESETEO){
+
                 puntaje1 = 0;
                 mostrarSeReseteanPuntos(jugador1);
+
             } else {
                 puntaje1 += puntos1;
             }
@@ -209,13 +234,20 @@ std::string modoDosJugadores(int infoPartida[]){
             int puntos2 = jugarRonda();
 
             if (puntos2 == ESCALERA){
-                mostrarJugadorGanaPorEscalera(jugador2);
+
+                mostrarGanador(jugador2, ESCALERA, ronda);
+
                 infoPartida[posRondas] = ronda;
                 infoPartida[posPuntos] = ESCALERA;
-                return jugador2;
-            } else if (puntos2 == -1) {
+
+                ganador = jugador2;
+                break;
+
+            } else if (puntos2 == RESETEO) {
+
                 puntaje2 = 0;
                 mostrarSeReseteanPuntos(jugador2);
+
             } else {
                 puntaje2 += puntos2;
             }
@@ -223,16 +255,24 @@ std::string modoDosJugadores(int infoPartida[]){
             mostrarPuntajeParcial(jugador1, puntaje1, jugador2, puntaje2);
 
             if (puntaje1 >= 100 && (puntaje1 < puntaje2 || puntaje2 < 100)){
-                    mostrarJugadorGana(jugador1, puntaje1, ronda);
+                    mostrarGanador(jugador1, puntaje1, ronda);
+
                     infoPartida[posRondas] = ronda;
                     infoPartida[posPuntos] = puntaje1;
-                    return jugador1;
+
+                    ganador = jugador1;
+                    break;
                 }
+
             if (puntaje2 >= 100 && (puntaje2 < puntaje1 || puntaje1 < 100)){
-                    mostrarJugadorGana(jugador2, puntaje2, ronda);
+
+                    mostrarGanador(jugador2, puntaje2, ronda);
+
                     infoPartida[posRondas] = ronda;
                     infoPartida[posPuntos] = puntaje2;
-                    return jugador2;
+
+                    ganador = jugador2;
+                    break;
                 }
 
             system("pause");
@@ -243,11 +283,13 @@ std::string modoDosJugadores(int infoPartida[]){
 
     }
 
+    return ganador;
+
 }
 
 int jugarRonda(){
 
-    int ESCALERA = 100, RESETEAR = -1;
+    int ESCALERA = -1, RESETEAR = -2;
     int lanzamientos = 3;
     int puntos[lanzamientos];
 
@@ -272,15 +314,16 @@ int jugarRonda(){
 
 int tirarDados(){
 
-    const int RESETEAR = -1;
+    const int ESCALERA = -1;
+    const int RESETEAR = -2;
     const int SUMA = 1;
     const int MULTIPLICAR = 2;
-    const int ESCALERA = 100;
 
     int cantidadDados = 6, puntaje, combinacion;
     int dados[cantidadDados];
 
     for(int i = 0; i<6; i++){
+
         dados[i] = (rand()%6)+1;
     }
 
@@ -289,10 +332,10 @@ int tirarDados(){
     mostrarDados(dados, cantidadDados);
 
     switch(combinacion){
-        case RESETEAR:      mostrarCombinacion(RESETEAR, dados[0]);         puntaje = ESCALERA; break;
+        case RESETEAR:      mostrarCombinacion(RESETEAR, dados[0]);     puntaje = RESETEAR; break;
         case SUMA:          mostrarCombinacion(SUMA, dados[0]);         puntaje = calcularCombinacion(dados, cantidadDados, SUMA); break;
-        case MULTIPLICAR:   mostrarCombinacion(MULTIPLICAR, dados[0]);  puntaje = RESETEAR; break;
-        case ESCALERA:      mostrarCombinacion(ESCALERA, dados[0]);     puntaje = calcularCombinacion(dados, cantidadDados, MULTIPLICAR); break;
+        case MULTIPLICAR:   mostrarCombinacion(MULTIPLICAR, dados[0]);  puntaje = calcularCombinacion(dados, cantidadDados, MULTIPLICAR); break;
+        case ESCALERA:      mostrarCombinacion(ESCALERA, dados[0]);     puntaje = ESCALERA; break;
     }
 
     return puntaje;
@@ -300,10 +343,26 @@ int tirarDados(){
 }
 
 void puntuacionMaxima(std::string nombre, int infoMejorJugada[]){
-    int posRondas = 0, posPuntos = 1;
-    cout<<endl;
-    cout<<"El mejor jugador fue: "<<nombre<<endl;
-    cout<<"Obtuvo un puntaje de "<<infoMejorJugada[posPuntos]<<" en "<<infoMejorJugada[posRondas]<<" rondas!"<<endl<<endl;
+
+    int posRondas = 0, posPuntos = 1, ESCALERA = -1;
+
+    if(infoMejorJugada[posPuntos] == ESCALERA){
+
+        cout<<endl;
+        cout<<"EL JUGADOR "<<nombre<<" GANO CON ESCALERA EN LA RONDA "<<infoMejorJugada[posRondas]<<" ALTA SUERTE TIENE EL LOCO"<<endl;
+
+    } else if(nombre == "Sin ganador"){
+
+        cout<<endl;
+        cout<<"Aun no se han registrado victorias."<<endl;
+
+    } else{
+
+        cout<<endl;
+        cout<<"El mejor jugador fue: "<<nombre<<endl;
+        cout<<"Obtuvo un puntaje de "<<infoMejorJugada[posPuntos]<<" en "<<infoMejorJugada[posRondas]<<" rondas!"<<endl<<endl;
+
+    }
 
 }
 
@@ -311,8 +370,9 @@ std::string analizarInfoPartida(std::string nombreActual, std::string nombreJuga
 
     int posRondas = 0, posPuntos = 1;
 
-    if(nombreActual == "Sin registro" ||
-      (infoPartida[posPuntos] < infoMejorPartida[posPuntos] && infoPartida[posRondas] < infoMejorPartida[posRondas])){
+    if(nombreJugador == "Sin ganador") return nombreActual;
+
+    if(infoPartida[posPuntos] <= infoMejorPartida[posPuntos] && infoPartida[posRondas] <= infoMejorPartida[posRondas]){
 
         infoMejorPartida[posRondas] = infoPartida[posRondas];
         infoMejorPartida[posPuntos] = infoPartida[posPuntos];

@@ -1,16 +1,18 @@
 #ifndef JUEGO_H_INCLUDED
 #define JUEGO_H_INCLUDED
 
-std::string modoUnJugador(int infoPartida[]);
+std::string modoUnJugador(int infoPartida[], bool partidaSimulada);
 std::string modoDosJugadores(int infoPartida[]);
-void puntuacionMaxima(std::string nombre, int infoMejorPartida[]);
-int jugarRonda();
-int tirarDados();
+
+int jugarTurno(int puntosActuales, int ronda, bool partidaSimulada);
+int jugarRonda(bool partidaSimulada);
+int tirarDados(bool partidaSimulada);
+
 int analizarCombinacion(int dados[], int cantidadDados);
 int calcularCombinacion(int dados[], int cantidadDados, int combinacion);
 int obtenerPuntajeMaximo(int puntos[], int cantidadPuntos);
-std::string analizarInfoPartida(std::string nombreActual, std::string nombreMejorJugador, int infoPartida[], int infoMejorPartida[]);
-int jugarTurno(int puntosActuales, int ronda);
-bool chequearGanador(int puntaje, int infoPartida[], int rondas);
+bool chequearGanador(int puntaje);
+int obtenerGanador(int puntaje1, int puntaje2);
+void guardarInfoPartida(int infoPartida[], int puntaje, int ronda);
 
 #endif // JUEGO_H_INCLUDED

@@ -84,3 +84,20 @@ int obtenerPuntajeMaximo(int puntos[], int cantidadPuntos){
     return puntos[posMax];
 
 }
+
+std::string analizarInfoPartida(std::string nombreActual, std::string nombreJugador, int infoPartida[], int infoMejorPartida[]){
+
+    int posRondas = 0, posPuntos = 1;
+
+    if(nombreJugador == "Sin ganador") return nombreActual;
+
+    if(infoPartida[posPuntos] <= infoMejorPartida[posPuntos] && infoPartida[posRondas] <= infoMejorPartida[posRondas]){
+
+        infoMejorPartida[posRondas] = infoPartida[posRondas];
+        infoMejorPartida[posPuntos] = infoPartida[posPuntos];
+        return nombreJugador;
+    }
+
+    return nombreActual;
+
+}

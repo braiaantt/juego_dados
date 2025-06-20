@@ -13,6 +13,30 @@ std::string obtenerNombre(){
 
 }
 
+void mostrarPuntuacionMaxima(std::string nombre, int infoMejorJugada[]){
+
+    int posRondas = 0, posPuntos = 1, ESCALERA = -1;
+
+    if(infoMejorJugada[posPuntos] == ESCALERA){
+
+        cout<<endl;
+        cout<<"EL JUGADOR "<<nombre<<" GANO CON ESCALERA EN LA RONDA "<<infoMejorJugada[posRondas]<<" ALTA SUERTE TIENE EL LOCO"<<endl;
+
+    } else if(nombre == "Sin ganador"){
+
+        cout<<endl;
+        cout<<"Aun no se han registrado victorias."<<endl;
+
+    } else{
+
+        cout<<endl;
+        cout<<"El mejor jugador fue: "<<nombre<<endl;
+        cout<<"Obtuvo un puntaje de "<<infoMejorJugada[posPuntos]<<" en "<<infoMejorJugada[posRondas]<<" rondas!"<<endl<<endl;
+
+    }
+
+}
+
 bool establecerRondas(){
 
     char respuesta;
@@ -129,10 +153,31 @@ void mostrarJugadorPierde(std::string nombre, int puntaje){
 void mostrarSeReseteanPuntos(){
 
     cout<<"Uhh tuviste mala suerte, se te van a resetear los puntos a 0 :c"<<endl<<endl;
+    system("pause");
+    system("cls");
 
 }
 
 void mostrarPuntajeParcial(std::string nombre1, int puntaje1, std::string nombre2, int puntaje2) {
+
     std::cout << "Puntaje de " << nombre1 << ": " << puntaje1 << std::endl;
     std::cout << "Puntaje de " << nombre2 << ": " << puntaje2 << std::endl;
+    system("pause");
+    system("cls");
+
+
+}
+
+int pedirValorDado(int numDado){
+
+    int valorDado;
+
+    cout<<"Ingrese valor del dado #"<<numDado<<": "; cin>>valorDado;
+
+    while(valorDado < 1 || valorDado > 6){
+        cout<<"Ingrese un valor entre 1 y 6 por favor. Valor del dado #"<<numDado<<": "; cin>>valorDado;
+    }
+
+    return valorDado;
+
 }
